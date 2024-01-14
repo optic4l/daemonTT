@@ -2,18 +2,17 @@ import json, base64
 
 def obtener_ultimo_objeto(archivo):
     ultimo_objeto = None
+    
+    for linea in archivo:
+        # Decodificar la línea como JSON
+        try:
+            objeto = json.loads(linea)
+        except json.JSONDecodeError as e:
+            print(f"Error al decodificar JSON: {e}")
+            continue
 
-    with open(archivo, 'r') as f:
-        for linea in f:
-            # Decodificar la línea como JSON
-            try:
-                objeto = json.loads(linea)
-            except json.JSONDecodeError as e:
-                print(f"Error al decodificar JSON: {e}")
-                continue
-
-            # Retener el objeto actual como el último
-            ultimo_objeto = objeto
+        # Retener el objeto actual como el último
+        ultimo_objeto = objeto
 
     return ultimo_objeto
 
